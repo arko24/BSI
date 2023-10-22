@@ -103,16 +103,20 @@ margin-right: 130px; /* Atur jarak kanan 10px */
 }
 
 .question-container button, .answer-container button {
-background-color: #0074cc;
-color: #fff;
-padding: 10px 20px;
-border: none;
-cursor: pointer;
-position: absolute;
-bottom: 30px;
-right: 30px;
+    background-color: #121d24;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* Menambahkan border-radius untuk membuat tombol lebih bulat */
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
 }
 
+.question-container button:hover, .answer-container button:hover {
+    background-color: #0074cc;
+}
 
 .question-container, .answer-container {
 display: none;
