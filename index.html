@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+<style>
+        body {
+            background-image: url('bk.jpeg');
+            background-size: 100% 100%; /* Mengisi seluruh halaman tanpa pemotongan */
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.8);
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            /* CSS untuk perangkat dengan lebar maksimum 768px (handphone) */
+            body {
+                background-image: url('hp.jpeg');
+            }
+        }
+
+    @media (max-width: 768px) {
+        .question-container, .answer-container {
+            padding: 10px;
+        }
+    }
+    .question-container h2, .answer-container h2 {
+        margin-top: 0;
+    }
+
+    .answer-container p {
+        font-weight: bold;
+    }
+
+    .answer-container {
+        max-height: 500px; /* Atur tinggi maksimum sesuai kebutuhan */
+        overflow-y: auto; /* Aktifkan scrolling vertikal jika kontennya terlalu panjang */
+    }
+
+    /* Desain scrollbar */
+    .answer-container::-webkit-scrollbar {
+        width: 12px; /* Lebar scrollbar */
+    }
+
+    .answer-container::-webkit-scrollbar-thumb {
+        background-color: #0074cc; /* Warna thumb scrollbar */
+        border: 3px solid #fff; /* Garis tepi thumb scrollbar */
+        border-radius: 10px; /* Bentuk thumb scrollbar */
+    }
+
+    .answer-container::-webkit-scrollbar-thumb:hover {
+        background-color: #0056a4; /* Warna thumb scrollbar saat dihover */
+    }
+
+    /* Desain scrollbar track */
+    .answer-container::-webkit-scrollbar-track {
+        background-color: #f7f7f7; /* Warna track scrollbar */
+    }
+
+    /* Desain tombol panah (untuk Firefox) */
+    .answer-container::-webkit-scrollbar-button {
+        display: none; /* Sembunyikan tombol panah (hanya berlaku di Firefox) */
+    }
+
+    /* Desain scrollbar (untuk Firefox) */
+    .answer-container {
+        scrollbar-width: thin;
+        scrollbar-color: #0074cc #f7f7f7;
+    }
+
+
+    .question-container label {
+        cursor: pointer;
+        display: block;
+    }
+
+    .back-button {
+        margin-right: 100px; /* Atur jarak kanan 10px */
+    }
+
+    .submit-button {
+        margin-left: 10px; /* Atur jarak kiri 10px */
+    }
+
+    .question-container button, .answer-container button {
+        background-color: #0074cc;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+    }
+
+
+    .question-container, .answer-container {
+        display: none;
+        text-align: left;
+        max-width: 1000px;
+        margin: 120px auto 0;
+        padding: -10px;
+        margin-bottom: 10px;
+        color: white;
+        overflow: auto;
+    }
+
+
+    /* Tambahkan efek berkelap-kelip pada label yang dipilih */
+    .question-container label.selected {
+        background-color: rgba(0, 116, 204, 0.7); /* Warna dengan opacity */
+        color: #fff;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            background-color: rgba(0, 116, 204, 0.7); /* Warna dengan opacity */
+        }
+        50% {
+            background-color: rgba(0, 170, 255, 0.7); /* Warna dengan opacity */
+        }
+        100% {
+            background-color: rgba(0, 116, 204, 0.7); /* Warna dengan opacity */
+        }
+    }
+
+    #animated-text span {
+      opacity: 0;
+    }
+
+</style>
+
+</head>
+<body>
+    <div class="question-container" id="question1">
+        <h3 id="animated-text">Hallo Sebelum memulai permainan ini, bolehkah kami tahu rentang usia Anda?</h3>
+        <label for="question1-A" onclick="selectAnswer(1, 'A', 1)">A. Di atas 75 atau di bawah 18 tahun</label>
+        <br>
+        <label for="question1-B" onclick="selectAnswer(1, 'B', 2)">B. 66-75 tahun</label>
+        <br>
+        <label for="question1-C" onclick="selectAnswer(1, 'C', 3)">C. 56-65 tahun</label>
+        <br>
+        <label for="question1-D" onclick="selectAnswer(1, 'D', 4)">D. 46-55 tahun</label>
+        <br>
+        <label for="question1-E" onclick="selectAnswer(1, 'E', 5)">E. 18-45 tahun</label>
+        <br>
+        <button onclick="showAnswer(1); revealLetters();">Submit</button>
+    </div>
+    <div class="answer-container" id="answer1" style="display: none;">
+    </div>
+
+    <div class="question-container" id="question2">
+        <h3 id="animated-text">Apa produk dana/investasi yang Anda miliki saat ini?</h3>
+        <label for="question2-A" onclick="selectAnswer(2, 'A', 1)">A. Hanya uang tunai (deposito dan tabungan)</label>
+        <br>
+        <label for="question2-B" onclick="selectAnswer(2, 'B', 2)">B. Sebagian besar uang tunai (seperti di atas ditambah obligasi atau investasi sejenis lainnya)</label>
+        <br>
+        <label for="question2-C" onclick="selectAnswer(2, 'C', 3)">C. Campuran (Reksa Dana Campuran, properti dan uang tunai)</label>
+        <br>
+        <label for="question2-D" onclick="selectAnswer(2, 'D', 4)">D. Agresif (saham unggulan, Reksa Dana Saham, Reksa Dana Indeks, komoditas)</label>
+        <br>
+        <label for="question2-E" onclick="selectAnswer(2, 'E', 5)">E. Spekulatif (saham-saham teknologi/biomedis, investasi derivatif, option, future dan waran)</label>
+        <br>
+        <button class="back-button" onclick="showQuestion(1);">Kembali</button>
+        <button onclick="showAnswer(2)">Submit</button>
+    </div>
+    <div class="answer-container" id="answer2" style="display: none;">
+    </div>
+
+    <div class="question-container" id="question3">
+        <h3 id="animated-text">Sudah berapa lama Anda melakukak investasi?</h3>
+        <label for="question3-A" onclick="selectAnswer(3, 'A', 1)">A. Tidak memiliki pengalaman</label>
+        <br>
+        <label for="question3-B" onclick="selectAnswer(3, 'B', 2)">B. Kurang dari 3 tahun</label>
+        <br>
+        <label for "question3-C" onclick="selectAnswer(3, 'C', 3)">C. 3-6 tahun</label>
+        <br>
+        <label for="question3-D" onclick="selectAnswer(3, 'D', 4)">D. 7-10 tahun</label>
+        <br>
+        <label for="question3-E" onclick="selectAnswer(3, 'E', 5)">E. Lebih dari 10 Tahun</label>
+        <br>
+        <button class="back-button" onclick="showQuestion(2);">Kembali</button>
+        <button onclick="showAnswer(3)">Submit</button>
+    </div>
+    <div class="answer-container" id="answer3" style="display: none;">
+    </div>
+
+    <div class="question-container" id="question4">
+        <h3 id="animated-text">Jika investasi yang anda miliki merugi, apa yang akan Anda lakukan?</h3>
+        <label for="question4-A" onclick="selectAnswer(4, 'A', 1)">A. Langsung dijual, karena tidak bisa menerima penurunan nilai pokok investasi</label>
+        <br>
+        <label for="question4-B" onclick="selectAnswer(4, 'B', 2)">B. Dijual jika potensi kerugian tersebut telah mencapai lebih dari 5%</label>
+        <br>
+        <label for="question4-C" onclick="selectAnswer(4, 'C', 3)">C. Tidak panik, karena masih ada kemungkinan nilai investasi akan kembali dan berpotensi untuk mendapatkan keuntungan dalam jangka panjang</label>
+        <br>
+        <label for="question4-D" onclick="selectAnswer(4, 'D', 4)">D. Menambah jumlah investasi, fluktuasi negatif dalam jangka waktu tertentu merupakan peluang untuk memperoleh potensi imbal hasil yang maksimal</label>
+        <br>
+        <button class="back-button" onclick="showQuestion(3);">Kembali</button>
+        <button onclick="showAnswer(4)">Submit</button>
+    </div>
+    <div class="answer-container" id="answer4" style="display: none;">
+    </div>
+
+    <div class="question-container" id="question5">
+        <h3 id="animated-text">Semakin tinggi risiko dari suatu investasi, semakin besar potensial fluktuasinya dan semakin besar pula tingkat pengembaliannya (High Risk, High Return). Berapa tingkat fluktuasi yang sesuai dengan Anda?</h3
+        <br>
+        <label for="question5-A" onclick="selectAnswer(5, 'A', 1)">A. Fluktuasi antara -5% dan +5%</label>
+        <br>
+        <label for="question5-B" onclick="selectAnswer(5, 'B', 2)">B. Fluktuasi antara -10% dan +10%</label>
+        <br>
+        <label for="question5-C" onclick="selectAnswer(5, 'C', 3)">C. Fluktuasi antara -15% dan +15%</label>
+        <br>
+        <label for="question5-D" onclick="selectAnswer(5, 'D', 4)">D. Fluktuasi antara -20% dan +20%</label>
+        <br>
+        <label for="question5-E" onclick="selectAnswer(5, 'E', 5)">E. Fluktuasi antara <-20% dan >+20%</label>
+        <br>
+        <button class="back-button" onclick="showQuestion(4);">Kembali</button>
+        <button onclick="showAnswer(5)">Submit</button>
+    </div>
+    <div class="answer-container" id="answer5">
+        <p>Hasil Jawaban Anda</p>
+        <p>Jumlah Poin: <span id="total-points">0</span></p>
+    </div>
+
+<script>
+// Inisialisasi variabel global
+let totalPoints = 0;
+const selectedAnswers = {};
+
+// Fungsi untuk mengatur animasi teks
+function revealLetters(textContainer) {
+    // Ambil teks pertanyaan dari kontainer
+    let text = textContainer.innerText;
+
+    // Kosongkan konten dari elemen <h3>
+    textContainer.innerText = "";
+
+    // Iterasi melalui setiap huruf dalam teks dan tambahkan setiap huruf dalam sebuah <span>
+    for (let i = 0; i < text.length; i++) {
+        let letterSpan = document.createElement("span");
+        letterSpan.innerText = text[i];
+        textContainer.appendChild(letterSpan);
+    }
+
+    let spans = textContainer.querySelectorAll("span");
+    let currentLetter = 0;
+
+    function showNextLetter() {
+        if (currentLetter < spans.length) {
+            spans[currentLetter].style.opacity = 1;
+            currentLetter++;
+            setTimeout(showNextLetter, 50); // Ubah durasi sesuai kebutuhan
+        }
+    }
+
+    showNextLetter();
+}
+
+// Fungsi untuk menampilkan pertanyaan baru dan panggil revealLetters
+function showQuestion(questionNumber) {
+    for (let i = 1; i <= 5; i++) {
+        const questionContainer = document.getElementById(`question${i}`);
+        if (i === questionNumber) {
+            questionContainer.style.display = 'block';
+            const textContainer = questionContainer.querySelector("#animated-text");
+            
+            // Panggil fungsi revealLetters() setiap kali pertanyaan baru ditampilkan
+            revealLetters(textContainer);
+        } else {
+            questionContainer.style.display = 'none';
+        }
+    }
+}
+
+// Fungsi untuk memilih jawaban
+function selectAnswer(questionNumber, answer, points) {
+    selectedAnswers[questionNumber] = { answer, points };
+    const labels = document.querySelectorAll(`[for^="question${questionNumber}-"]`);
+    labels.forEach((label) => {
+        label.classList.remove('selected');
+    });
+
+    const selectedLabel = document.querySelector(`[for="question${questionNumber}-${answer}"]`);
+    selectedLabel.classList.add('selected');
+}
+
+// Fungsi untuk menampilkan jawaban
+function showAnswer(questionNumber) {
+    const questionContainer = document.getElementById(`question${questionNumber}`);
+    const answerContainer = document.getElementById(`answer${questionNumber}`);
+
+    questionContainer.style.display = 'none';
+
+    if (questionNumber < 5) {
+        showQuestion(questionNumber + 1);
+    } else {
+        calculateTotalPoints();
+        document.getElementById('total-points').textContent = totalPoints;
+        const resultContainer = document.getElementById('answer5');
+        resultContainer.style.display = 'block';
+
+        // Determine the result based on the total points
+        let resultText = '';
+        if (totalPoints <= 8) {
+            resultText = `
+                <p>Profil Resiko: Conservative</p>
+                <p>Produk: Deposito Berjangka dan Reksa Dana Pasar Uang</p>
+                <ul>
+                    Saya adalah investor dengan tipe konservatif. Saya memiliki profil risiko yang
+                    rendah dan cenderung menghindari risiko (risk averse). Saat Saya berinvestasi, Saya
+                    lebih menyukai instrumen investasi yang aman dan takut jika pokok investasi (modal
+                    awal) akan berkurang atau mengalami penurunan. Saya juga merasa nyaman dengan
+                    instrumen investasi yang imbal hasilnya tidak terlalu besar tetapi bergerak stabil.
+                    <br>
+                    <br>
+                    BSI Merekomendasikan produk berupa :
+                    <br>•   Deposito Syariah
+                    <br>•   Reksa Dana Syariah Pasar Uang
+                    <br>•   Reksa Dana Pendapatan Tetap
+                    <br>    
+                    <br>Ini adalah produk reksa dana Syariah pasar uang yang bisa Saya investasikan
+                    <br>•   Mandiri Pasar Uang Syariah (MPUS)
+                    <br>•   Bahana Likuid Syariah (BLS) Kelas G
+                    <br>•   Manulife Dana Kas Syariah (MDKS)
+                    <br>•   Sucorinvest Sharia Money Market Fund
+                    <br>•   Trimegah Kas Syariah
+                    <br>•   Mandiri Investa Dana Syariah (MIDSYA)
+                    <br>•   Bahana MES Syariah Fund (MES)
+                    <br>•   Sucorinvest Sharia Sukuk Fund
+                    <br>•   Manulife Syariah Sukuk Indonesia (MSSI)
+                    <br>•   Bahana MES Syariah Fund Kelas I (BMES I)
+                    <br>•   Bahana USD Nadhira Sukuk
+                    <br>
+                    <br>Personality 
+                    <br>•   Sedikit demi sedikit lama – lama jadi bukit
+                    <br>•   Risk Averse
+                    <br>•   Rules No 1. Never Lose Your Money, Rules No. 2 Never Forget Rules No 1
+                </ul>
+            `;
+        } else if (totalPoints >= 9 && totalPoints <= 16) {
+            resultText = `
+                <p>Profil Resiko: Moderate</p>
+                <p>Produk:</p>
+                <li>         Reksa Dana Pendapatan Tetap/Obligasi</li>
+                <li>         Reksa Dana Terproteksi</li>
+                <li>         Sukuk Negara Ritel</li>
+                <ul>
+                    Saya memiliki profile risiko moderat (sedang) ini memliki karakteristik yang siap menerima fluktuasi jangka pendek dengan potensi keuntungan yang diharapkan dapat lebih tinggi dari inflasi dan deposito.
+                    <br>
+                    <br>BSI Merekomendasikan produk berupa :
+                    <br>•   Reksa Dana Syariah Pendapatan Tetap
+                    <br>•   Reksa Dana Syariah Terproteksi
+                    <br>•   Reksa Dana Campuran
+                    <br>•   Sukuk Negara (Sukuk Ritel, Sukuk Tabungan, dan PBS)
+                    <br>
+                    <br>Ini adalah produk reksa dana Syariah pasar uang yang bisa Saya investasikan
+                    <br>•   Mandiri Investa Dana Syariah (MIDSYA)
+                    <br>•   Bahana MES Syariah Fund (MES)
+                    <br>•   Sucorinvest Sharia Sukuk Fund
+                    <br>•   Manulife Syariah Sukuk Indonesia (MSSI)
+                    <br>•   Bahana MES Syariah Fund Kelas I (BMES I)
+                    <br>•   Bahana USD Nadhira Sukuk 
+                    <br>•   Mandiri Investa Syariah Berimbang (MISB)
+                    <br>•   TRIM Syariah Berimbang
+                    <br>
+                    <br>Personality 
+                    <br>•   Pelan tapi pasti
+                    <br>•   Bang Bing Bung Yuk Kita Nabung
+                    <br>•   Comfort Zone <li>
+                </ul>
+            `;
+        } else if (totalPoints >= 17 && totalPoints <= 24) {
+            resultText = `
+                <p>Profil Resiko: Aggressive</p>
+                <p>Produk:</p>
+                    <li>Reksa Dana Saham</li>
+                    <li>Reksa Dana Indeks</li>
+                    <li>Reksa Dana Campuran</li>
+                <ul> Saya memiliki profil risiko agresif sangat siap untung dan juga siap rugi (risk taker). Saya siap kehilangan sebagian besar bahkan seluruh dana investasinya demi imbal hasil yang besar.
+                <br>
+                <br>BSI Merekomendasikan produk berupa :
+                <br>•   Reksa Dana Syariah Saham
+                <br>•   Reksa Dana Syariah Campuran
+                <br>
+                <br>Ini adalah produk reksa dana Syariah pasar uang yang bisa Saya investasikan
+                <br>•   Mandiri Investa Atraktif Syariah (MITRAS)
+                <br>•   BNP Paribas Pesona Syariah (BPPS)
+                <br>•   Bahana Icon Syariah (ICON Syariah)
+                <br>•   Manulife Syariah Sektoral Amanah Kelas A (MSSA)
+                <br>•   Batavia Dana Saham Syariah
+                <br>•   Trimegah Saham Syariah
+                <br>•   Mandiri Investa Syariah Berimbang (MISB)
+                <br>•   TRIM Syariah Berimbang
+                <br>
+                <br>Personality 
+                <br>•   Im risk taker
+                <br>•   High Risk, High Return
+                </ul>
+            `;
+        }
+
+        resultContainer.innerHTML = resultText;
+    }
+}
+
+
+// Fungsi untuk menghitung total poin
+function calculateTotalPoints() {
+    for (let i = 1; i <= 5; i++) {
+        if (selectedAnswers[i]) {
+            totalPoints += selectedAnswers[i].points;
+        }
+    }
+}
+
+// Tampilkan pertanyaan pertama saat halaman dimuat
+showQuestion(1);
+</script>
+</body>
+</html>
