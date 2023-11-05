@@ -154,3 +154,31 @@ animation: pulse 1s infinite;
 #animated-text span {
 opacity: 0;
 }
+
+#question2 {
+    background-image: url('1.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    opacity: 0.6;
+}
+
+#question3 {
+    background-image: url('2.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    opacity: 0.6;
+}
+
+#question4 {
+    background-image: url('3.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    opacity: 0.6;
+}
+
+#question5 {
+    background-image: url('4.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    opacity: 0.6;
+}

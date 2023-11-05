@@ -7,16 +7,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
     <div id="loading-screen">
         <img src="Spinn.gif" alt="Loading..." class="loading-spinner">
     </div>
 
-    <div class="question-container" id="question1" style="display: none;">
+    <div class="question-container" id="question1" style="display: none">
         <h3 id="animated-text">Hallo Sebelum memulai permainan ini, bolehkah kami tahu rentang usia Anda?</h3>
         <label for="question1-A" onclick="selectAnswer(1, 'A', 1)">A. Di atas 75 atau di bawah 18 tahun</label>
         <br>
-        <label for="question1-B" onclick="selectAnswer(1, 'B', 2)">B. 66-75 tahun</label>
+        <label for "question1-B" onclick="selectAnswer(1, 'B', 2)">B. 66-75 tahun</label>
         <br>
         <label for="question1-C" onclick="selectAnswer(1, 'C', 3)">C. 56-65 tahun</label>
         <br>
@@ -28,6 +27,7 @@
     </div>
     <div class="answer-container" id="answer1" style="display: none;">
     </div>
+
 
     <div class="question-container" id="question2">
         <h3 id="animated-text">Apa produk dana/investasi yang Anda miliki saat ini?</h3>
@@ -62,7 +62,7 @@
         <button class="back-button" onclick="showQuestion(2);">Kembali</button>
         <button onclick="showAnswer(3)">Selanjutnya</button>
     </div>
-    <div class="answer-container" id="answer3" style="display: none;">
+    <div class "answer-container" id="answer3" style="display: none;">
     </div>
 
     <div class="question-container" id="question4">
@@ -97,10 +97,12 @@
         <button class="back-button" onclick="showQuestion(4);">Kembali</button>
         <button onclick="showAnswer(5)">Submit</button>
     </div>
+
+    <div id="image-container"></div>
     <div class="answer-container" id="answer5">
         <p>Hasil Jawaban Anda</p>
         <p>Jumlah Poin: <span id="total-points">0</span></p>
     </div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
